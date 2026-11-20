@@ -30,7 +30,7 @@
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23763018'/%3E%3Cpath d='M32 14c-1.5 4-5 6-5 11 0 3 2.2 5 5 5s5-2 5-5c0-5-3.5-7-5-11z' fill='%23D9AB55'/%3E%3Cpath d='M18 40c0-4 6-7 14-7s14 3 14 7-6 5-14 5-14-1-14-5z' fill='none' stroke='%23D9AB55' stroke-width='2'/%3E%3Cline x1='32' y1='42' y2='50' x2='32' stroke='%23D9AB55' stroke-width='2'/%3E%3Cline x1='20' y1='50' x2='44' y2='50' stroke='%23D9AB55' stroke-width='2'/%3E%3C/svg%3E">
 
-<link rel="preload" as="image" href="assets/video/opening-poster.jpg">
+<link rel="preload" as="image" href="assets/video/opening-poster.jpg?v=2">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,8 +63,8 @@
      OPENING VIDEO
      ============================================================ -->
 <div id="opening" role="dialog" aria-label="Wedding invitation introduction">
-  <video id="opening-video" playsinline webkit-playsinline preload="auto" poster="assets/video/opening-poster.jpg" aria-hidden="true">
-    <source src="assets/video/opening-video.mp4" type="video/mp4">
+  <video id="opening-video" playsinline webkit-playsinline preload="auto" poster="assets/video/opening-poster.jpg?v=2" aria-hidden="true">
+    <source src="assets/video/opening-video.mp4?v=2" type="video/mp4">
   </video>
   <div class="opening-fade-veil"></div>
 
@@ -121,9 +121,11 @@
 
     </div>
 
-    <a class="scroll-cue" href="#beginning" aria-label="Scroll to explore">
-      <span>Scroll to Explore</span>
-      <span class="stem"></span>
+    <a class="scroll-cue" href="#beginning" aria-label="Scroll down to explore the invitation">
+      <span class="scroll-cue-label">Scroll to Explore</span>
+      <span class="scroll-btn" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
     </a>
   </section>
 
@@ -373,7 +375,124 @@
     </div>
   </section>
 
-  <!-- 08 · RSVP & WISHES -->
+  <!-- 08 · COLOUR CODE -->
+  <section id="colour-code" class="section bg-a bg-a-family">
+    <div class="bg-layer" aria-hidden="true"></div>
+    <div class="section-inner">
+      <div class="eyebrow reveal">Dress Code</div>
+      <h2 class="section-title reveal">Colour Code</h2>
+      <p class="palette-tagline reveal">Timeless · Warm · Effortless</p>
+      <div class="ornament-divider reveal" aria-hidden="true">
+        <span class="line"></span><span class="diamond"></span><span class="line"></span>
+      </div>
+      <p class="body-text palette-intro reveal">Our wedding palette — we would love to see you in any of these warm shades.</p>
+
+      <ol class="swatch-stack" aria-label="Wedding colour palette">
+        <li class="swatch" style="--c:#7B3A1E;">
+          <button type="button" class="swatch-inner" data-hex="#7B3A1E" aria-label="Cinnamon, colour code #7B3A1E. Tap to copy">
+            <span class="swatch-num">01</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Cinnamon</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#7B3A1E</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#B4561F;">
+          <button type="button" class="swatch-inner" data-hex="#B4561F" aria-label="Pumpkin, colour code #B4561F. Tap to copy">
+            <span class="swatch-num">02</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Pumpkin</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#B4561F</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#C78A2C;">
+          <button type="button" class="swatch-inner" data-hex="#C78A2C" aria-label="Mustard, colour code #C78A2C. Tap to copy">
+            <span class="swatch-num">03</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Mustard</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#C78A2C</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#6E6A2C;">
+          <button type="button" class="swatch-inner" data-hex="#6E6A2C" aria-label="Olive, colour code #6E6A2C. Tap to copy">
+            <span class="swatch-num">04</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Olive</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#6E6A2C</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#2F4A35;">
+          <button type="button" class="swatch-inner" data-hex="#2F4A35" aria-label="Forest, colour code #2F4A35. Tap to copy">
+            <span class="swatch-num">05</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Forest</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#2F4A35</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#4E2C1A;">
+          <button type="button" class="swatch-inner" data-hex="#4E2C1A" aria-label="Chocolate, colour code #4E2C1A. Tap to copy">
+            <span class="swatch-num">06</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Chocolate</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#4E2C1A</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#8A6B55;">
+          <button type="button" class="swatch-inner" data-hex="#8A6B55" aria-label="Taupe, colour code #8A6B55. Tap to copy">
+            <span class="swatch-num">07</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Taupe</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#8A6B55</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch swatch--light" style="--c:#D6BC98;">
+          <button type="button" class="swatch-inner" data-hex="#D6BC98" aria-label="Oatmeal, colour code #D6BC98. Tap to copy">
+            <span class="swatch-num">08</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Oatmeal</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#D6BC98</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="swatch" style="--c:#6E2F3A;">
+          <button type="button" class="swatch-inner" data-hex="#6E2F3A" aria-label="Mulberry, colour code #6E2F3A. Tap to copy">
+            <span class="swatch-num">09</span>
+            <span class="swatch-body">
+              <span class="swatch-name">Mulberry</span>
+              <span class="swatch-orn" aria-hidden="true"><i></i><b></b><i></i></span>
+              <span class="swatch-hex">#6E2F3A</span>
+            </span>
+            <span class="swatch-roll" aria-hidden="true"></span>
+          </button>
+        </li>
+      </ol>
+      <p class="palette-hint reveal">Tap a shade to copy its colour code</p>
+    </div>
+  </section>
+
+  <!-- 09 · RSVP & WISHES -->
   <section id="rsvp" class="section bg-f bg-f-rsvp">
     <div class="bg-layer" aria-hidden="true"></div>
     <div class="section-inner">
@@ -418,7 +537,7 @@
     </div>
   </section>
 
-  <!-- 09 · FINAL INVITATION -->
+  <!-- 10 · FINAL INVITATION -->
   <footer id="closing" class="section bg-f bg-f-closing">
     <div class="bg-layer" aria-hidden="true"></div>
     <div class="section-inner">

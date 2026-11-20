@@ -57,6 +57,11 @@ The countdown uses `countdownTarget: '2027-01-26T10:30:00+05:30'` (India time, A
 `assets/couple/our-moments.webp` is shown in the **Our Moments** section, deliberately soft (faded, gently desaturated, ivory wash) so it blends with the page. Tapping it opens the full-brightness photo.
 To change it, overwrite the file with the same name. To make it brighter or softer, edit `.moments-photo img` in `css/style.css` (`opacity` and `filter`).
 
+## Colour Code section
+
+The **Colour Code** section (before RSVP) shows the wedding palette as rolled fabric swatches. Guests can tap a shade to copy its colour code.
+To change a shade, edit its `<li class="swatch" style="--c:#7B3A1E;">` in `index.html`: change the `--c` value, the `data-hex` value and the visible code to the same hex. To add a 10th shade, copy one `<li class="swatch">…</li>` block, then update its number, name and colour.
+
 ## Showing the gallery again
 
 The Wedding Gallery section is currently **hidden** (commented out in `index.html`). When the photos are ready:
@@ -132,7 +137,7 @@ Only publish audio you have the right to use.
 
 ## Opening video
 
-- `assets/video/opening-video.mp4` — re-encoded from the supplied file (2 MB, H.264, fast-start for mobile).
+- `assets/video/opening-video.mp4` — mandapam entrance video (8 s, 1.6 MB, H.264, fast-start for mobile). It plays silently because the music starts on Tap to Begin.
 - Portrait phones: fills the screen; only the outer edges are trimmed, never the names/date in the centre.
 - Tablets/desktops (wider screens): the full 9:16 frame is shown, centred over a blurred backdrop — no stretching.
 - Plays once per visit after **Tap to Begin**; **Skip Intro** jumps straight in. It never replays on scroll.

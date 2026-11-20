@@ -191,7 +191,7 @@ figure{ margin:0; }
 }
 #opening::before{
   content:''; position:absolute; inset:-60px;
-  background:url('../assets/video/opening-poster.jpg') center/cover no-repeat;
+  background:url('../assets/video/opening-poster.jpg?v=2') center/cover no-repeat;
   filter:blur(28px) brightness(.5) saturate(1.1);
   z-index:0;
 }
@@ -220,7 +220,7 @@ figure{ margin:0; }
 /* --- Cover screen (first video frame + Tap to Begin) --- */
 .opening-cover{
   position:absolute; inset:0; z-index:4;
-  background:url('../assets/video/opening-poster.jpg') center/cover no-repeat;
+  background:url('../assets/video/opening-poster.jpg?v=2') center/cover no-repeat;
   display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
   padding:0 8vw calc(max(48px, env(safe-area-inset-bottom)) + 24px);
   text-align:center;
@@ -427,11 +427,23 @@ main.is-visible{ opacity:1; transition:opacity 1.2s var(--ease-soft); }
   position:absolute;
   bottom:max(22px, env(safe-area-inset-bottom));
   left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:8px;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
   z-index:3; padding:6px 10px;
+  -webkit-tap-highlight-color:transparent;
 }
-.scroll-cue span{ font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--terracotta); opacity:.75; }
-.scroll-cue .stem{ width:1px; height:30px; background:linear-gradient(180deg, var(--gold), transparent); animation:cue-move 2.2s ease-in-out infinite; }
+.scroll-cue-label{ font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--terracotta); opacity:.8; font-weight:600; }
+.scroll-btn{
+  width:48px; height:48px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--terracotta);
+  background:rgba(255,250,240,.7);
+  border:1px solid var(--gold);
+  box-shadow:0 0 0 4px rgba(255,250,240,.4), 0 8px 20px -10px rgba(90,36,16,.45);
+  animation:scrollBob 2.4s ease-in-out infinite;
+  transition:background .35s var(--ease-soft), color .35s var(--ease-soft);
+}
+.scroll-cue:hover .scroll-btn, .scroll-cue:active .scroll-btn{ background:var(--terracotta); color:var(--jasmine); }
+@keyframes scrollBob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
 @keyframes cue-move{ 0%{ opacity:.2; transform:scaleY(.4); transform-origin:top;} 50%{ opacity:1; transform:scaleY(1); transform-origin:top;} 100%{ opacity:.2; transform:scaleY(.4); transform-origin:top;} }
 
 /* ============================================================
@@ -763,6 +775,90 @@ main.is-visible{ opacity:1; transition:opacity 1.2s var(--ease-soft); }
   .moments-photo:hover img{ opacity:.9; filter:saturate(.8) sepia(.12) contrast(.94) brightness(1.03); }
 }
 @media (min-width:900px){ .moments-card{ width:380px; } }
+
+/* ============================================================
+   COLOUR CODE — rolled fabric swatches
+   ============================================================ */
+.palette-tagline{
+  margin:10px 0 0;
+  font-family:var(--font-deco); font-size:clamp(11px,2.9vw,13px);
+  letter-spacing:.3em; text-transform:uppercase; color:var(--gold-text);
+}
+.palette-intro{ margin:0 auto; max-width:26em; }
+.swatch-stack{
+  list-style:none; margin:28px auto 0; padding:0;
+  max-width:520px; text-shadow:none;
+  counter-reset:none;
+}
+.swatch{ position:relative; margin-top:-7px; }       /* rolls overlap slightly, like a stack */
+.swatch:first-child{ margin-top:0; }
+.swatch:nth-child(1){ z-index:9 } .swatch:nth-child(2){ z-index:8 } .swatch:nth-child(3){ z-index:7 }
+.swatch:nth-child(4){ z-index:6 } .swatch:nth-child(5){ z-index:5 } .swatch:nth-child(6){ z-index:4 }
+.swatch:nth-child(7){ z-index:3 } .swatch:nth-child(8){ z-index:2 } .swatch:nth-child(9){ z-index:1 }
+.swatch-inner{
+  position:relative; width:100%;
+  display:flex; align-items:center;
+  min-height:clamp(62px, 15vw, 76px);
+  padding:0 54px 0 12px;
+  border:0; border-radius:10px 999px 999px 10px;
+  color:var(--jasmine);
+  background:
+    /* soft top light + bottom shade for a rounded, woven look */
+    linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 35%, rgba(0,0,0,0) 62%, rgba(0,0,0,.26) 100%),
+    /* fine wool weave */
+    repeating-linear-gradient(115deg, rgba(255,255,255,.035) 0 2px, rgba(0,0,0,.035) 2px 4px),
+    repeating-linear-gradient(25deg, rgba(0,0,0,.03) 0 1px, rgba(255,255,255,.02) 1px 3px),
+    var(--c);
+  box-shadow:0 10px 18px -12px rgba(40,15,5,.75), inset 0 1px 0 rgba(255,255,255,.12);
+  font:inherit; text-align:center; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .45s var(--ease-soft), box-shadow .45s var(--ease-soft);
+}
+.swatch-roll{
+  /* the rolled end of the fabric */
+  position:absolute; right:0; top:0; bottom:0; width:clamp(40px,10vw,52px);
+  border-radius:0 999px 999px 0;
+  background:
+    radial-gradient(ellipse 34% 40% at 46% 50%, rgba(0,0,0,.30), rgba(0,0,0,0) 70%),
+    radial-gradient(ellipse 62% 70% at 46% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.20) 62%, rgba(0,0,0,0) 70%),
+    linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,0) 30%, rgba(255,255,255,.07) 70%, rgba(0,0,0,.22));
+  box-shadow:inset 1px 0 0 rgba(0,0,0,.15);
+}
+.swatch-num{
+  flex:0 0 auto;
+  width:clamp(40px,10vw,48px); height:clamp(40px,10vw,48px); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:#F3E7D3; color:var(--brown);
+  font-family:var(--font-display); font-weight:600; font-size:clamp(17px,4.4vw,20px);
+  box-shadow:0 2px 6px rgba(0,0,0,.25), inset 0 0 0 1px rgba(217,171,85,.5);
+}
+.swatch-body{ flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 4px; min-width:0; }
+.swatch-name{
+  font-family:var(--font-deco); font-weight:500;
+  font-size:clamp(15px,4.2vw,19px); letter-spacing:.16em; text-transform:uppercase;
+  text-shadow:0 1px 6px rgba(0,0,0,.3);
+}
+.swatch-orn{ display:flex; align-items:center; gap:5px; opacity:.75; }
+.swatch-orn i{ width:clamp(18px,6vw,30px); height:1px; background:currentColor; }
+.swatch-orn b{ width:5px; height:5px; border:1px solid currentColor; transform:rotate(45deg); }
+.swatch-hex{
+  font-family:var(--font-body); font-size:10.5px; font-weight:600;
+  letter-spacing:.2em; text-transform:uppercase; opacity:.82;
+  min-height:1.2em;
+}
+.swatch--light .swatch-inner{ color:#5A3A22; }
+.swatch--light .swatch-name{ text-shadow:0 1px 4px rgba(255,255,255,.35); }
+.swatch-inner:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+@media (hover:hover) and (pointer:fine){
+  .swatch-inner:hover{ transform:translateX(6px); box-shadow:0 16px 26px -14px rgba(40,15,5,.8), inset 0 1px 0 rgba(255,255,255,.14); }
+}
+.swatch-inner:active{ transform:scale(.985); }
+.swatch.is-copied .swatch-hex{ opacity:1; }
+.palette-hint{ margin:18px 0 0; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-text); opacity:.85; }
+/* entrance: rolls slide in one after another (GSAP) */
+.swatch{ opacity:0; transform:translateX(-28px); }
+.no-gsap .swatch{ opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce){ .swatch{ opacity:1 !important; transform:none !important; } .scroll-btn{ animation:none; } }
 
 /* ============================================================
    LIGHTBOX

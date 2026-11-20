@@ -371,7 +371,7 @@
     if(window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
     if(reduceMotion){
-      gsap.set('.reveal, .reveal-scale, .hero-art', { opacity:1, y:0, scale:1 });
+      gsap.set('.reveal, .reveal-scale, .hero-art, .swatch', { opacity:1, y:0, x:0, scale:1 });
       return;
     }
 
@@ -392,6 +392,14 @@
         });
       }
     });
+
+    // Colour code: fabric rolls slide in one after another
+    if(document.querySelector('.swatch-stack')){
+      gsap.to('.swatch', {
+        opacity:1, x:0, duration:1, ease:'power3.out', stagger:0.09,
+        scrollTrigger:{ trigger:'.swatch-stack', start:'top 82%', once:true }
+      });
+    }
 
     // Very slow decorative parallax
     document.querySelectorAll('[data-parallax]').forEach(function(el){
@@ -499,6 +507,32 @@
     }, { rootMargin:'100px 0px' });
     secs.forEach(function(s){ io.observe(s); });
   })();
+
+  /* ---------------------------------------------------------
+     6b. COLOUR CODE — tap a shade to copy its code
+  --------------------------------------------------------- */
+  document.querySelectorAll('.swatch-inner').forEach(function(btn){
+    var hexEl = btn.querySelector('.swatch-hex');
+    var hex = btn.getAttribute('data-hex');
+    var timer = 0;
+    btn.addEventListener('click', function(){
+      function done(ok){
+        hexEl.textContent = ok ? 'Copied ' + hex : hex;
+        btn.parentNode.classList.toggle('is-copied', ok);
+        clearTimeout(timer);
+        timer = setTimeout(function(){ hexEl.textContent = hex; btn.parentNode.classList.remove('is-copied'); }, 1600);
+      }
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(hex).then(function(){ done(true); }, function(){ done(false); });
+      } else {
+        try{
+          var ta = document.createElement('textarea'); ta.value = hex; ta.setAttribute('readonly','');
+          ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta);
+          ta.select(); var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
+        }catch(e){ done(false); }
+      }
+    });
+  });
 
   /* ---------------------------------------------------------
      7. CUSTOM CURSOR (fine pointer only)
