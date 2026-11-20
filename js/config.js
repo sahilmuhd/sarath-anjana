@@ -49,7 +49,7 @@ window.WEDDING_CONFIG = {
     bride: {
       relation: 'Daughter of',
       parents:  ['C. K. Anilkumar', 'Shaija Anil'],
-      address:  ['Chanassey House', 'P.O. Avinissery', 'Anakkalu', 'Thrissur'],
+      address:  ['Chanassery House', 'P.O. Avinissery', 'Anakkalu', 'Thrissur'],
       siblingsLabel: 'Sisters',
       siblings: ['Anjali Anil', 'Archana Anil']
     }
