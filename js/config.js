@@ -66,9 +66,9 @@ window.WEDDING_CONFIG = {
        the music button simply stays hidden. */
     src: 'assets/audio/ReelAudio-13014.mp3',
     volume: 0.45,          // 0–1 background level
-    fadeInSeconds: 2.5,
+    fadeInSeconds: 1,  
     fadeOutSeconds: 1.8,
-    loop: true,            // gentle loop: fades out, short pause, fades back in
+    loop: true,            // gentle loop: fades out, short pause, fades back in from 0:00
     loopGapSeconds: 1.5
   }
 };

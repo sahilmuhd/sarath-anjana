@@ -83,13 +83,6 @@
     music.unlocked = true;
     setupWebAudio();
     if(music.ctx && music.ctx.state === 'suspended') music.ctx.resume();
-    try{
-      bgMusic.muted = true;
-      var p = bgMusic.play();
-      bgMusic.pause();
-      bgMusic.muted = false;
-      if(p && p.catch) p.catch(function(){});
-    }catch(e){}
   }
 
   function currentLevel(){
@@ -127,9 +120,11 @@
     musicToggle.classList.add('is-visible');
   }
 
-  function playMusic(){
+  function playMusic(fromStart){
     if(!music.available) return;
     music.wanted = true;
+    music.everStarted = true;
+    if(fromStart){ try{ bgMusic.currentTime = 0; }catch(e){} }
     clearTimeout(music.loopTimer);
     if(music.ctx && music.ctx.state === 'suspended') music.ctx.resume();
     if(music.gain) music.gain.gain.value = 0; else { try{ bgMusic.volume = 0; }catch(e){} }
@@ -203,16 +198,6 @@
   var videoStarted = false;
   var safetyTimer = 0;
 
-  function fadeVideoAudio(ms, done){
-    if(video.muted || video.paused){ done(); return; }
-    var start = performance.now(), from = video.volume;
-    (function step(t){
-      var k = Math.min(1, (t - start) / ms);
-      try{ video.volume = from * (1 - k); }catch(e){}
-      if(k < 1) requestAnimationFrame(step); else done();
-    })(start);
-  }
-
   function endIntro(){
     if(introDone) return;
     introDone = true;
@@ -222,13 +207,10 @@
     main.classList.add('is-visible');
     document.body.classList.remove('intro-active');
     triggerHero();
-    // Video sound fades out first, then the music fades in — never both at once
-    fadeVideoAudio(500, function(){
-      video.pause();
-      video.muted = true;
-      showToggle();
-      playMusic();
-    });
+    video.pause();
+    showToggle();
+    // Music normally started on "Tap to Begin"; start it here only if that was blocked
+    if(!music.everStarted) playMusic(true);
     setTimeout(function(){
       openingEl.style.display = 'none';
       if(window.ScrollTrigger) ScrollTrigger.refresh();
@@ -238,20 +220,20 @@
   function startInvitation(){
     if(videoStarted) return;
     videoStarted = true;
-    unlockMusic(); // inside the tap gesture
+    // The song starts from 0:00 right on the tap (a direct user gesture,
+    // so it is allowed on Android and iPhone). The intro video plays
+    // silently underneath so the two sounds never overlap.
+    unlockMusic();
+    showToggle();
+    playMusic(true);
 
     openingCover.classList.add('is-hidden');
     skipBtn.classList.add('is-active');
 
-    video.muted = false;
-    video.volume = 1;
+    video.muted = true;
     var attempt = video.play();
     if(attempt && attempt.catch){
-      attempt.catch(function(){
-        // sound blocked → try silent playback, otherwise go straight in
-        video.muted = true;
-        video.play().catch(function(){ endIntro(); });
-      });
+      attempt.catch(function(){ endIntro(); });
     }
   }
 
@@ -427,10 +409,6 @@
       });
     }
 
-    // Soft floating ornaments
-    gsap.utils.toArray('.float-soft').forEach(function(el, i){
-      gsap.to(el, { y:-7, duration:3.6 + i * 0.4, ease:'sine.inOut', yoyo:true, repeat:-1 });
-    });
   }
 
   var heroPlayed = false;
@@ -512,6 +490,16 @@
     if(window.ScrollTrigger) ScrollTrigger.refresh();
   });
 
+  /* Background slow-zoom runs only while a section is on screen */
+  (function(){
+    var secs = document.querySelectorAll('.section');
+    if(!('IntersectionObserver' in window)){ secs.forEach(function(s){ s.classList.add('in-view'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ en.target.classList.toggle('in-view', en.isIntersecting); });
+    }, { rootMargin:'100px 0px' });
+    secs.forEach(function(s){ io.observe(s); });
+  })();
+
   /* ---------------------------------------------------------
      7. CUSTOM CURSOR (fine pointer only)
   --------------------------------------------------------- */
@@ -535,13 +523,20 @@
   --------------------------------------------------------- */
   var progressBar = document.getElementById('scroll-progress');
   var backToTop = document.getElementById('back-to-top');
+  var scrollMax = 1, uiTicking = false;
+  function measure(){ scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight); }
   function onScrollUI(){
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    progressBar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
-    if(backToTop) backToTop.classList.toggle('show', window.scrollY > window.innerHeight * 0.9);
+    uiTicking = false;
+    var y = window.scrollY;
+    progressBar.style.transform = 'scaleX(' + Math.min(1, y / scrollMax).toFixed(4) + ')';
+    if(backToTop) backToTop.classList.toggle('show', y > window.innerHeight * 0.9);
   }
-  window.addEventListener('scroll', function(){ requestAnimationFrame(onScrollUI); }, { passive:true });
+  measure();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  window.addEventListener('scroll', function(){
+    if(uiTicking) return; uiTicking = true; requestAnimationFrame(onScrollUI);
+  }, { passive:true });
   onScrollUI();
   if(backToTop){
     backToTop.addEventListener('click', function(){
@@ -619,13 +614,17 @@
     var particles = [];
     for(var i = 0; i < COUNT; i++) particles.push(spawn());
 
-    function draw(){
+    var lastDraw = 0;
+    function draw(t){
+      requestAnimationFrame(draw);
+      if(t - lastDraw < 33) return;          // ~30 fps is plenty for slow drifting dust
+      lastDraw = t;
       ctx.clearRect(0, 0, w, h);
       for(var i = 0; i < particles.length; i++){
         var p = particles[i];
-        p.sway += p.swaySpeed;
-        p.x += p.speedX + Math.sin(p.sway) * 0.3;
-        p.y += p.speedY;
+        p.sway += p.swaySpeed * 2;
+        p.x += (p.speedX + Math.sin(p.sway) * 0.3) * 2;
+        p.y += p.speedY * 2;
         if(p.y > h + 20){ p.y = -20; p.x = Math.random() * w; }
         if(p.x > w + 20) p.x = -20;
         if(p.x < -20) p.x = w + 20;
@@ -639,8 +638,7 @@
         }
         ctx.fill();
       }
-      requestAnimationFrame(draw);
     }
-    draw();
+    requestAnimationFrame(draw);
   })();
 })();
