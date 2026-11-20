@@ -395,10 +395,11 @@
 
     // Colour code: fabric rolls slide in one after another
     if(document.querySelector('.swatch-stack')){
-      gsap.to('.swatch', {
-        opacity:1, x:0, duration:1, ease:'power3.out', stagger:0.09,
-        scrollTrigger:{ trigger:'.swatch-stack', start:'top 82%', once:true }
-      });
+      var grid = !!document.querySelector('.palette--cards, .palette--circles');
+      gsap.fromTo('.swatch',
+        grid ? { opacity:0, y:26, scale:.94 } : { opacity:0, x:-28 },
+        { opacity:1, x:0, y:0, scale:1, duration:1, ease:'power3.out', stagger: grid ? 0.07 : 0.09,
+          scrollTrigger:{ trigger:'.swatch-stack', start:'top 82%', once:true } });
     }
 
     // Very slow decorative parallax
@@ -517,7 +518,7 @@
     var timer = 0;
     btn.addEventListener('click', function(){
       function done(ok){
-        hexEl.textContent = ok ? 'Copied ' + hex : hex;
+        hexEl.textContent = ok ? 'Copied \u2713' : hex;
         btn.parentNode.classList.toggle('is-copied', ok);
         clearTimeout(timer);
         timer = setTimeout(function(){ hexEl.textContent = hex; btn.parentNode.classList.remove('is-copied'); }, 1600);

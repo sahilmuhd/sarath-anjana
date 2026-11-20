@@ -59,7 +59,11 @@ To change it, overwrite the file with the same name. To make it brighter or soft
 
 ## Colour Code section
 
-The **Colour Code** section (before RSVP) shows the wedding palette as rolled fabric swatches. Guests can tap a shade to copy its colour code.
+The **Colour Code** section (before RSVP) shows the wedding palette as designer swatch cards.
+Two other built-in designs are available. Change the class on `<section id="colour-code" …>` in `index.html`:
+- `palette--cards` — swatch cards (current)
+- `palette--circles` — silk jewel circles
+- remove the class — stacked rolled-fabric bars Guests can tap a shade to copy its colour code.
 To change a shade, edit its `<li class="swatch" style="--c:#7B3A1E;">` in `index.html`: change the `--c` value, the `data-hex` value and the visible code to the same hex. To add a 10th shade, copy one `<li class="swatch">…</li>` block, then update its number, name and colour.
 
 ## Showing the gallery again
