@@ -57,7 +57,7 @@ window.WEDDING_CONFIG = {
     /* Paste your Google Apps Script Web App URL here (ends in /exec).
        Leave empty ('') and the form is shown as "awaiting setup"
        and will NOT pretend to accept responses. See README.md. */
-    endpoint: '',
+    endpoint: 'https://script.google.com/macros/s/AKfycbwZWZe8jagJzRYU1l-HrW1WVNbV-LBZkyTxMxzU3MZbM3vdVIJNHHqPtGrwW4kC5A8yug/exec',
     maxGuests: 10
   },
 
