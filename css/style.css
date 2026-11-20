@@ -238,8 +238,8 @@ figure{ margin:0; }
 .opening-names{
   margin-top:10px;
   font-family:var(--font-display); font-weight:600;
-  font-size:clamp(28px, 8vw, 46px);
-  letter-spacing:.04em; text-transform:uppercase;
+  font-size:clamp(36px, 11vw, 56px);
+  letter-spacing:.05em; text-transform:uppercase;
   color:var(--jasmine); line-height:1.12;
   text-shadow:0 2px 18px rgba(0,0,0,.45);
 }
@@ -394,8 +394,8 @@ main.is-visible{ opacity:1; transition:opacity 1.2s var(--ease-soft); }
 .hero-names{
   margin:12px 0 0;
   font-family:var(--font-display); font-weight:600;
-  font-size:clamp(34px, 10.4vw, 60px);
-  line-height:1.06;
+  font-size:clamp(46px, 14vw, 76px);
+  line-height:1.04;
   letter-spacing:.045em; text-transform:uppercase;
   color:var(--terracotta);
 }
@@ -904,8 +904,8 @@ main.is-visible{ opacity:1; transition:opacity 1.2s var(--ease-soft); }
 .closing-names{
   margin-top:18px;
   font-family:var(--font-display); font-weight:600;
-  font-size:clamp(30px, 8.6vw, 50px);
-  letter-spacing:.045em; text-transform:uppercase; line-height:1.08;
+  font-size:clamp(40px, 12vw, 68px);
+  letter-spacing:.05em; text-transform:uppercase; line-height:1.08;
   color:var(--terracotta);
 }
 .closing-names span{ display:block; white-space:nowrap; }
@@ -948,7 +948,7 @@ main.is-visible{ opacity:1; transition:opacity 1.2s var(--ease-soft); }
   :root{ --container:760px; --edge:8vw; }
   .skip-intro{ font-size:12px; padding:12px 22px; }
 
-  .hero-names{ font-size:clamp(58px, 6.4vw, 96px); }
+  .hero-names{ font-size:clamp(76px, 8vw, 120px); }
   .hero-amp{ font-size:clamp(30px, 3vw, 44px); }
 
   .beginning-inner{ max-width:1000px; flex-direction:row; gap:6vw; text-align:left; }

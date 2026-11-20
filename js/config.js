@@ -16,8 +16,10 @@ window.WEDDING_CONFIG = {
   siteUrl: 'https://sarath-anjana.vercel.app/',
 
   couple: {
-    groom: { name: 'Sarath Kumar' },
-    bride: { name: 'Anjana Anil' }
+    /* name     → used everywhere on the site
+       fullName → used only in the Our Families section */
+    groom: { name: 'Sarath', fullName: 'Sarath Kumar' },
+    bride: { name: 'Anjana', fullName: 'Anjana Anil' }
   },
 
   wedding: {
@@ -64,7 +66,7 @@ window.WEDDING_CONFIG = {
   music: {
     /* Place the supplied track at this path. If the file is missing,
        the music button simply stays hidden. */
-    src: 'assets/audio/ReelAudio-13014.mp3',
+    src: 'assets/audio/wedding-song.mp3',
     volume: 0.45,          // 0–1 background level
     fadeInSeconds: 1,  
     fadeOutSeconds: 1.8,

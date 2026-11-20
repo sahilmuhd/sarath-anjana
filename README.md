@@ -1,4 +1,4 @@
-# Sarath Kumar & Anjana Anil — Wedding Invitation Website
+# Sarath & Anjana — Wedding Invitation Website
 
 Static site (HTML + CSS + JavaScript + GSAP). No build step — upload the folder as-is to Vercel, Netlify, GitHub Pages or any static host.
 
@@ -16,7 +16,7 @@ Static site (HTML + CSS + JavaScript + GSAP). No build step — upload the folde
 
 Until step 1 is done, the RSVP form is clearly marked *"awaiting backend configuration"* and its submit button is disabled — it never pretends to accept a response.
 
-The music (`assets/audio/ReelAudio-13014.mp3`) is already included.
+The music (`assets/audio/wedding-song.mp3`) is already included.
 
 ---
 
@@ -36,7 +36,7 @@ assets/
   art/                      supplied illustrations (couple, henna feet, terracotta artwork)
   couple/                   ← PHOTO PLACEHOLDERS (replace these)
   venue/venue.webp          ← venue photo placeholder
-  audio/ReelAudio-13014.mp3 background music
+  audio/wedding-song.mp3 background music
 google-apps-script/rsvp.gs  RSVP backend for Google Sheets
 ```
 
@@ -119,10 +119,10 @@ If you later edit the script, use **Deploy → Manage deployments → Edit → N
 
 ## Music
 
-- File path: `assets/audio/ReelAudio-13014.mp3` (change in `js/config.js` → `music.src` if needed).
+- File path: `assets/audio/wedding-song.mp3` (change in `js/config.js` → `music.src` if needed).
 - Starts **from the beginning (0:00) the moment the visitor taps "Tap to Begin"** and keeps playing through the intro and the whole site. The intro video plays silently, so the two never overlap.
 - Fades in over 1 s to a background level of 45 %; the floating ♪ button (bottom-right) mutes/unmutes with a fade.
-- The track is short (~18 s), so it loops **gently**: fade out → 1.5 s pause → fade back in. Set `loop: false` in `config.js` to play it once.
+- The track (~44 s) loops **gently**: fade out → 1.5 s pause → fade back in. Set `loop: false` in `config.js` to play it once.
 - Pauses automatically when the visitor switches apps/tabs, resumes when they return.
 - Works on Android and iPhone (Web Audio is used for fades because iOS ignores media volume).
 
