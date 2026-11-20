@@ -32,7 +32,7 @@ window.WEDDING_CONFIG = {
   },
 
   venue: {
-    name:      'Chanassery House',
+    name:      'Neelambari Eco Tourism',
     placeFull: 'Arattupuzha, Thrissur, Kerala',
     placeShort:'Arattupuzha, Thrissur',
     mapUrl:    'https://share.google/u8Y6ipMD6K1pwBRGW'
@@ -49,7 +49,7 @@ window.WEDDING_CONFIG = {
     bride: {
       relation: 'Daughter of',
       parents:  ['C. K. Anilkumar', 'Shaija Anil'],
-      address:  ['Chanassery House', 'P.O. Avinissery', 'Anakkalu', 'Thrissur'],
+      address:  ['Chanassey House', 'P.O. Avinissery', 'Anakkalu', 'Thrissur'],
       siblingsLabel: 'Sisters',
       siblings: ['Anjali Anil', 'Archana Anil']
     }
